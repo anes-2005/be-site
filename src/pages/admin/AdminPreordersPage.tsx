@@ -3,7 +3,7 @@ import { supabase, type Preorder, type Collection } from '@/lib/supabase';
 import { AdminLayout } from './AdminLayout';
 import { useSeo } from '@/lib/seo';
 import { Badge } from '@/components/Badge';
-import { Search } from 'lucide-react';
+import { Search, Trash2 } from 'lucide-react';
 
 type PreorderWithCollection = Preorder & { collections: Pick<Collection, 'name' | 'slug'> | null };
 
@@ -51,6 +51,23 @@ export function AdminPreordersPage() {
     setRows((prev) => prev.map((x) => (x.id === r.id ? { ...x, status } : x)));
   };
 
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const deletePreorder = async (r: PreorderWithCollection) => {
+    const confirmed = window.confirm(
+      `Delete the preorder from "${r.full_name}"? This cannot be undone.`
+    );
+    if (!confirmed) return;
+    setDeletingId(r.id);
+    const { error } = await supabase.from('preorders').delete().eq('id', r.id);
+    setDeletingId(null);
+    if (error) {
+      window.alert('Failed to delete preorder: ' + error.message);
+      return;
+    }
+    setRows((prev) => prev.filter((x) => x.id !== r.id));
+  };
+
   return (
     <AdminLayout active="/admin/preorders">
       <div className="px-6 py-8 md:px-10 md:py-10">
@@ -90,6 +107,7 @@ export function AdminPreordersPage() {
                     <th className="px-5 py-4 font-medium">Qty</th>
                     <th className="px-5 py-4 font-medium">Date</th>
                     <th className="px-5 py-4 font-medium">Status</th>
+                    <th className="px-5 py-4 font-medium text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line bg-bg-50">
@@ -121,6 +139,17 @@ export function AdminPreordersPage() {
                           <option value="confirmed">Confirmed</option>
                           <option value="cancelled">Cancelled</option>
                         </select>
+                      </td>
+                      <td className="px-5 py-4 text-right">
+                        <button
+                          type="button"
+                          onClick={() => deletePreorder(r)}
+                          disabled={deletingId === r.id}
+                          title="Delete preorder"
+                          className="inline-flex items-center justify-center rounded-lg border border-error/20 p-2 text-error/70 transition-colors hover:border-error hover:bg-error/10 hover:text-error disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                          <Trash2 size={14} strokeWidth={1.5} />
+                        </button>
                       </td>
                     </tr>
                   ))}
