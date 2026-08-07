@@ -79,6 +79,8 @@ export interface SiteSettings {
   email_notifications_enabled: boolean;
   resend_from_email: string | null;
   resend_from_name: string;
+  price_size_lg_px: number;
+  price_size_sm_px: number;
   updated_at: string;
 }
 
@@ -163,6 +165,8 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   email_notifications_enabled: true,
   resend_from_email: null,
   resend_from_name: 'be Preorders',
+  price_size_lg_px: 36,
+  price_size_sm_px: 17,
   updated_at: '',
 };
 
