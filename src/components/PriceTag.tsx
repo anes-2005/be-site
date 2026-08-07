@@ -1,4 +1,5 @@
 import { type Collection } from '@/lib/supabase';
+import { useSettings } from '@/lib/settings-context';
 
 const CURRENCY_SYMBOLS: Record<string, string> = {
   DZD: 'DZD',
@@ -41,23 +42,24 @@ interface PriceTagProps {
 }
 
 export function PriceTag({ collection, className = '', size = 'md', align = 'left' }: PriceTagProps) {
+  const { settings } = useSettings();
   const current = formatPrice(collection.current_price, collection.currency);
   const old = formatPrice(collection.old_price, collection.currency);
   if (!current) return null;
 
   const sizes = {
-    sm: { cur: 'text-[15px]', old: 'text-[12px]' },
-    md: { cur: 'text-[1.25rem]', old: 'text-[13px]' },
-    lg: { cur: 'text-[1.75rem]', old: 'text-[15px]' },
+    sm: { cur: settings.price_size_sm_px, old: Math.round(settings.price_size_sm_px * 0.76) },
+    md: { cur: 24, old: 14 },
+    lg: { cur: settings.price_size_lg_px, old: Math.round(settings.price_size_lg_px * 0.44) },
   } as const;
 
   const alignClass = align === 'center' ? 'justify-center' : 'justify-start';
 
   return (
     <div className={`flex items-baseline gap-3 ${alignClass} ${className}`}>
-      <span className={`font-serif font-light text-primary ${sizes[size].cur}`}>{current}</span>
+      <span className="font-serif font-light text-primary" style={{ fontSize: `${sizes[size].cur}px` }}>{current}</span>
       {old && (
-        <span className={`font-sans font-light text-ink/40 line-through ${sizes[size].old}`}>{old}</span>
+        <span className="font-sans font-light text-ink/40 line-through" style={{ fontSize: `${sizes[size].old}px` }}>{old}</span>
       )}
     </div>
   );
