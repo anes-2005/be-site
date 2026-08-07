@@ -104,7 +104,62 @@ export function AdminSiteSettings() {
             </div>
           </Section>
 
-          {/* WHY PREORDER */}
+          {/* TYPOGRAPHY */}
+          <Section title="Price Text Size" desc="Control exactly how big the price appears, in pixels. Preview updates instantly as you type — press Save to apply it on the live site.">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div>
+                <label className="field-label">Large price (home & collection page)</label>
+                <div className="mt-2 flex items-center gap-3">
+                  <input
+                    type="range"
+                    min={20}
+                    max={64}
+                    value={draft.price_size_lg_px}
+                    onChange={(e) => set('price_size_lg_px', parseInt(e.target.value, 10))}
+                    className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-line accent-primary"
+                  />
+                  <input
+                    type="number"
+                    min={10}
+                    max={120}
+                    value={draft.price_size_lg_px}
+                    onChange={(e) => set('price_size_lg_px', parseInt(e.target.value, 10) || 0)}
+                    className="field-input !w-20 text-center"
+                  />
+                  <span className="font-sans text-[12px] text-ink/40">px</span>
+                </div>
+                <div className="mt-4 flex min-h-[70px] items-center justify-center rounded-xl border border-line bg-bg-100 px-4 py-3">
+                  <span className="font-serif font-light text-primary" style={{ fontSize: `${draft.price_size_lg_px}px` }}>DZD 4,500</span>
+                </div>
+              </div>
+
+              <div>
+                <label className="field-label">Small price (store cards)</label>
+                <div className="mt-2 flex items-center gap-3">
+                  <input
+                    type="range"
+                    min={10}
+                    max={32}
+                    value={draft.price_size_sm_px}
+                    onChange={(e) => set('price_size_sm_px', parseInt(e.target.value, 10))}
+                    className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-line accent-primary"
+                  />
+                  <input
+                    type="number"
+                    min={8}
+                    max={60}
+                    value={draft.price_size_sm_px}
+                    onChange={(e) => set('price_size_sm_px', parseInt(e.target.value, 10) || 0)}
+                    className="field-input !w-20 text-center"
+                  />
+                  <span className="font-sans text-[12px] text-ink/40">px</span>
+                </div>
+                <div className="mt-4 flex min-h-[70px] items-center justify-center rounded-xl border border-line bg-bg-100 px-4 py-3">
+                  <span className="font-serif font-light text-primary" style={{ fontSize: `${draft.price_size_sm_px}px` }}>DZD 4,500</span>
+                </div>
+              </div>
+            </div>
+          </Section>
           <Section title="Why Preorder Cards" desc="The three cards under the collection preview on the home page.">
             <ListEditor
               items={draft.why_preorder}
