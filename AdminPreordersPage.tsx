@@ -49,6 +49,21 @@ export function AdminPreordersPage() {
   const setStatus = async (r: Preorder, status: Preorder['status']) => {
     await supabase.from('preorders').update({ status }).eq('id', r.id);
     setRows((prev) => prev.map((x) => (x.id === r.id ? { ...x, status } : x)));
+
+    // Fire-and-forget: keep the linked Google Sheet row in sync too.
+    try {
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/google-integration`;
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({ action: 'update-sheet-status', preorderId: r.id, status }),
+      }).catch(() => {});
+    } catch {
+      // Ignore — the status is already saved in the database either way.
+    }
   };
 
   const [deletingId, setDeletingId] = useState<string | null>(null);
