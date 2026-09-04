@@ -42,34 +42,36 @@ export function CollectionShowcaseCarousel() {
 
   return (
     <div>
-      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-primary md:aspect-[21/9]">
-        {loading || images.length === 0 ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-primary" />
-        ) : (
-          images.map((src, i) => (
-            <img
-              key={i}
-              src={src}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-in-out"
-              style={{ opacity: i === index % images.length ? 1 : 0 }}
-            />
-          ))
-        )}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent" />
-
-        {images.length > 1 && (
-          <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-2">
-            {images.map((_, i) => (
-              <span
+      <div className="mx-auto max-w-md">
+        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-line bg-primary shadow-card">
+          {loading || images.length === 0 ? (
+            <div className="absolute inset-0 flex items-center justify-center bg-primary" />
+          ) : (
+            images.map((src, i) => (
+              <img
                 key={i}
-                className={`h-1.5 rounded-full transition-all duration-500 ${
-                  i === index % images.length ? 'w-6 bg-bg' : 'w-1.5 bg-bg/40'
-                }`}
+                src={src}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-in-out"
+                style={{ opacity: i === index % images.length ? 1 : 0 }}
               />
-            ))}
-          </div>
-        )}
+            ))
+          )}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/45 via-transparent to-transparent" />
+
+          {images.length > 1 && (
+            <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-2">
+              {images.map((_, i) => (
+                <span
+                  key={i}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                    i === index % images.length ? 'w-6 bg-bg' : 'w-1.5 bg-bg/40'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="mt-12 flex justify-center">
