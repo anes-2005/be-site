@@ -5,26 +5,21 @@ import { useLang } from '@/lib/i18n';
 import { useSeo } from '@/lib/seo';
 import { navigate } from '@/lib/router';
 import { FadeIn } from '@/components/FadeIn';
-import { ImageBlock } from '@/components/ImageBlock';
 import { SectionHeader } from '@/components/SectionHeader';
-import { StockCounter } from '@/components/StockCounter';
-import { Gallery } from '@/components/Gallery';
-import { PreorderForm } from '@/components/PreorderForm';
+import { IdeaForm } from '@/components/IdeaForm';
+import { CollectionShowcaseCarousel } from '@/components/CollectionShowcaseCarousel';
 import { Button } from '@/components/Button';
-import { Badge } from '@/components/Badge';
-import { PriceTag } from '@/components/PriceTag';
 import { ArrowDown } from 'lucide-react';
 
 export function HomePage() {
   const { settings } = useSettings();
   const { t, lang } = useLang();
   const [collection, setCollection] = useState<Collection | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useSeo({
     title: lang === 'ar' && settings.seo_title_ar ? settings.seo_title_ar : settings.seo_title,
     description: lang === 'ar' && settings.seo_description_ar ? settings.seo_description_ar : settings.seo_description,
-    ogImage: collection?.og_image || settings.og_image || settings.hero_image || undefined,
+    ogImage: settings.og_image || settings.hero_image || undefined,
   });
 
   useEffect(() => {
@@ -38,7 +33,6 @@ export function HomePage() {
         .maybeSingle();
       if (active) {
         setCollection(data as Collection | null);
-        setLoading(false);
       }
     })();
     return () => { active = false; };
@@ -78,7 +72,7 @@ export function HomePage() {
                   {t('hero.soldOut')}
                 </Button>
               ) : (
-                <Button size="lg" onClick={() => document.getElementById('preorder')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+                <Button size="lg" onClick={() => navigate('/store')}>
                   {lang === 'ar' && settings.hero_primary_cta_ar ? settings.hero_primary_cta_ar : settings.hero_primary_cta}
                 </Button>
               )}
@@ -90,7 +84,7 @@ export function HomePage() {
         </div>
 
         <button
-          onClick={() => navigate('/#collection')}
+          onClick={() => document.getElementById('idea')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 text-bg/50 transition-colors hover:text-bg"
           aria-label="Scroll down"
         >
@@ -98,38 +92,19 @@ export function HomePage() {
         </button>
       </section>
 
-      {/* SECTION 2 — COLLECTION HEADER + THREE PREVIEW IMAGES */}
-      <section id="collection" className="shell py-30 md:py-38">
-        <FadeIn>
-          <div className="text-center">
-            <p className="eyebrow mb-6">{t('collection.eyebrow')}</p>
-            <h2 className="font-serif font-light text-primary" style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', letterSpacing: '-0.01em' }}>
-              {collectionName(c, lang)}
-            </h2>
-            {c?.short_description && (
-              <p className="mx-auto mt-6 max-w-xl font-sans text-[15px] font-light leading-relaxed text-ink/55">
-                {collectionDesc(c, lang)}
-              </p>
-            )}
-            {c?.current_price != null && (
-              <div className="mt-6 flex justify-center">
-                <PriceTag collection={c} size="lg" align="center" />
-              </div>
-            )}
-          </div>
-        </FadeIn>
-
-        <div className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-          {(c?.preview_images ?? ['', '', '']).map((src, i) => (
-            <FadeIn key={i} delay={i * 100}>
-              <ImageBlock src={src} alt={`${c?.name ?? 'Collection'} ${i + 1}`} ratio="3/4" zoom />
-            </FadeIn>
-          ))}
+      {/* SECTION 2 — GIVE US YOUR IDEAS */}
+      <section id="idea" className="shell py-30 md:py-38">
+        <SectionHeader
+          eyebrow={t('idea.eyebrow')}
+          title={t('idea.title')}
+        />
+        <div className="mx-auto mt-16 max-w-3xl">
+          <IdeaForm />
         </div>
       </section>
 
-      {/* SECTION 3 — WHY PREORDER */}
-      <section className="bg-bg-100 py-30 md:py-38">
+      {/* SECTION 3 — WHY PREORDER (materials / quality) */}
+      <section id="why-preorder" className="bg-bg-100 py-30 md:py-38">
         <div className="content">
           <SectionHeader
             eyebrow={t('whyPreorder.eyebrow')}
@@ -159,49 +134,15 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 4 — OPTIONAL COLLECTION PREVIEW GALLERY */}
-      {c && c.gallery_images && c.gallery_images.length > 0 && (
-        <section className="shell py-30 md:py-38">
-          <SectionHeader eyebrow={t('preview.eyebrow')} title={t('preview.title')} />
-          <div className="mt-16">
-            <Gallery images={c.gallery_images} columns={3} />
-          </div>
-        </section>
-      )}
-
-      {/* SECTION 5 — REMAINING STOCK */}
-      <section className="bg-primary py-30 md:py-38">
-        <div className="content">
-          {c ? (
-            <StockCounter remaining={c.remaining_stock} max={c.max_stock} />
-          ) : (
-            <div className="text-center text-bg/60">{loading ? t('stock.loading') : ''}</div>
-          )}
-          <div className="mt-12 flex justify-center">
-            {soldOut ? (
-              <Badge tone="error">{t('hero.soldOut')}</Badge>
-            ) : (
-              <Button variant="outline" size="lg" className="border-bg/30 text-bg hover:bg-bg hover:text-primary" onClick={() => document.getElementById('preorder')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
-                {t('reserve.button')}
-              </Button>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 6 — PREORDER FORM */}
-      <section id="preorder" className="shell py-30 md:py-38">
+      {/* SECTION 4 — EXPLORE COLLECTIONS (rotating showcase, links to /store) */}
+      <section className="shell py-30 md:py-38">
         <SectionHeader
-          eyebrow={t('reserve.eyebrow')}
-          title={t('reserve.title')}
-          description={t('reserve.description')}
+          eyebrow={t('explore.eyebrow')}
+          title={t('explore.title')}
+          description={t('explore.description')}
         />
-        <div className="mx-auto mt-16 max-w-3xl">
-          {c ? (
-            <PreorderForm collection={c} onSuccess={() => navigate('/confirmation')} />
-          ) : (
-            <div className="card p-12 text-center text-ink/50">{loading ? t('stock.loading') : ''}</div>
-          )}
+        <div className="mt-16">
+          <CollectionShowcaseCarousel />
         </div>
       </section>
     </main>
@@ -216,10 +157,3 @@ function collectionName(c: Collection | null, lang: string): string {
   return c.name;
 }
 
-function collectionDesc(c: Collection | null, lang: string): string {
-  if (!c) return '';
-  if (lang === 'ar' && (c as Collection & { short_description_ar?: string }).short_description_ar) {
-    return (c as Collection & { short_description_ar?: string }).short_description_ar!;
-  }
-  return c.short_description;
-}
