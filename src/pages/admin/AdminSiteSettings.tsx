@@ -165,6 +165,44 @@ export function AdminSiteSettings() {
               </div>
             </div>
           </Section>
+
+          {/* EXPLORE COLLECTIONS COVER TEXT */}
+          <Section title="Explore Collections — Cover Text" desc="Control the 'BE / WORD' text shown over each collection's cover photo.">
+            <Toggle
+              label="Show cover text"
+              checked={draft.explore_cover_text_visible}
+              onChange={(v) => set('explore_cover_text_visible', v)}
+            />
+            <div className="mt-5">
+              <label className="field-label">Text color</label>
+              <div className="mt-2 flex items-center gap-3">
+                <input
+                  type="color"
+                  value={draft.explore_cover_text_color || '#F8F5EF'}
+                  onChange={(e) => set('explore_cover_text_color', e.target.value)}
+                  className="h-10 w-14 cursor-pointer rounded-lg border border-line bg-transparent p-1"
+                />
+                <input
+                  type="text"
+                  value={draft.explore_cover_text_color ?? ''}
+                  onChange={(e) => set('explore_cover_text_color', e.target.value || null)}
+                  placeholder="Auto (rotates gold / cream / soft blue)"
+                  className="field-input flex-1"
+                />
+                {draft.explore_cover_text_color && (
+                  <button
+                    type="button"
+                    onClick={() => set('explore_cover_text_color', null)}
+                    className="whitespace-nowrap font-sans text-[12px] text-ink/40 underline-offset-4 hover:text-primary hover:underline"
+                  >
+                    Reset to auto
+                  </button>
+                )}
+              </div>
+              <p className="mt-2 font-sans text-[12px] text-ink/40">Leave empty to keep the automatic rotating brand colors — one per card.</p>
+            </div>
+          </Section>
+
           <Section title="Why Preorder Cards" desc="The three cards under the collection preview on the home page.">
             <ListEditor
               items={draft.why_preorder}
@@ -302,6 +340,18 @@ export function AdminSiteSettings() {
 }
 
 /* ---------- shared field components ---------- */
+
+function Toggle({ label, checked, onChange }: { label: string; checked: boolean; onChange: (v: boolean) => void }) {
+  return (
+    <button type="button" onClick={() => onChange(!checked)}
+      className="flex w-full items-center justify-between rounded-xl border border-line px-4 py-3 text-left transition-colors hover:border-primary/30">
+      <span className="font-sans text-[12px] uppercase tracking-[0.18em] text-ink/70">{label}</span>
+      <span className={`relative h-5 w-9 rounded-full transition-colors ${checked ? 'bg-primary' : 'bg-bg-300'}`}>
+        <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-bg shadow transition-all ${checked ? 'left-[1.125rem]' : 'left-0.5'}`} />
+      </span>
+    </button>
+  );
+}
 
 function Section({ title, desc, children }: { title: string; desc?: string; children: React.ReactNode }) {
   return (
