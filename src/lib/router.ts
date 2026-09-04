@@ -39,6 +39,7 @@ function parseHash(): Route {
     if (segments.length === 2 && segments[1] === 'analytics') return { path: '/admin/analytics', params };
     if (segments.length === 2 && segments[1] === 'google') return { path: '/admin/google', params };
     if (segments.length === 2 && segments[1] === 'story') return { path: '/admin/story', params };
+    if (segments.length === 2 && segments[1] === 'ideas') return { path: '/admin/ideas', params };
     if (segments.length === 3 && segments[1] === 'collection') {
       return { path: '/admin/collection/:id', params: { id: decodeURIComponent(segments[2]) } };
     }

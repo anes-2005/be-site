@@ -21,6 +21,7 @@ import { AdminMediaLibrary } from '@/pages/admin/AdminMediaLibrary';
 import { AdminAnalyticsDashboard } from '@/pages/admin/AdminAnalyticsDashboard';
 import { AdminGoogleIntegrations } from '@/pages/admin/AdminGoogleIntegrations';
 import { AdminBrandStory } from '@/pages/admin/AdminBrandStory';
+import { AdminIdeasPage } from '@/pages/admin/AdminIdeasPage';
 
 const ADMIN_PREFIX = '/admin';
 
@@ -48,6 +49,7 @@ function AppContent() {
         {route.path === '/admin/analytics' && <AdminAnalyticsDashboard />}
         {route.path === '/admin/google' && <AdminGoogleIntegrations />}
         {route.path === '/admin/story' && <AdminBrandStory />}
+        {route.path === '/admin/ideas' && <AdminIdeasPage />}
       </AdminGate>
     );
   }

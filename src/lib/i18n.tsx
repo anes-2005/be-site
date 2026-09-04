@@ -193,6 +193,27 @@ const en: Dict = {
   'lang.switchToArabic': 'العربية',
   'lang.switchToEnglish': 'EN',
 
+  // Idea suggestion box
+  'idea.eyebrow': 'Have A Vision?',
+  'idea.title': 'Give us your ideas.',
+  'idea.description': 'Tell us the collection you wish existed — fabric, silhouette, mood. We read every submission.',
+  'idea.name': 'Your Name',
+  'idea.nameReq': 'Please enter your name.',
+  'idea.contact': 'Email or Phone (optional)',
+  'idea.message': 'Your Idea',
+  'idea.messagePlaceholder': 'Describe the collection you would love to see from us…',
+  'idea.messageReq': 'Please share your idea before sending.',
+  'idea.submit': 'Send Idea',
+  'idea.sending': 'Sending…',
+  'idea.success': 'Thank you — your idea has been received.',
+  'idea.error': 'Something went wrong. Please try again.',
+
+  // Explore collections
+  'explore.eyebrow': 'The Collections',
+  'explore.title': 'Crafted with intention.',
+  'explore.description': 'Premium materials, considered silhouettes, limited runs. Explore every collection we have made.',
+  'explore.button': 'Explore Collections',
+
   // Translation prompt
   'prompt.title': 'Would you like to browse this website in Arabic?',
   'prompt.translate': 'Translate to Arabic',
@@ -366,6 +387,27 @@ const ar: Dict = {
   'lang.ar': 'العربية',
   'lang.switchToArabic': 'العربية',
   'lang.switchToEnglish': 'EN',
+
+  // Idea suggestion box
+  'idea.eyebrow': 'لديك فكرة؟',
+  'idea.title': 'أعطنا أفكارك.',
+  'idea.description': 'أخبرنا عن الكولكشن الذي تتمنى أن نصممه — القماش، الشكل، الإحساس. نقرأ كل اقتراح يصلنا.',
+  'idea.name': 'اسمك',
+  'idea.nameReq': 'الرجاء إدخال اسمك.',
+  'idea.contact': 'البريد الإلكتروني أو الهاتف (اختياري)',
+  'idea.message': 'فكرتك',
+  'idea.messagePlaceholder': 'صف الكولكشن الذي تحب أن نصممه…',
+  'idea.messageReq': 'الرجاء كتابة فكرتك قبل الإرسال.',
+  'idea.submit': 'أرسل الفكرة',
+  'idea.sending': 'جارٍ الإرسال…',
+  'idea.success': 'شكرًا لك — وصلتنا فكرتك.',
+  'idea.error': 'حدث خطأ ما. حاول مرة أخرى.',
+
+  // Explore collections
+  'explore.eyebrow': 'الكولكشنات',
+  'explore.title': 'صُنعت بعناية.',
+  'explore.description': 'خامات فاخرة، تصاميم مدروسة، إصدارات محدودة. اكتشف كل كولكشن صنعناه.',
+  'explore.button': 'اكتشف الكولكشنات',
 
   // Translation prompt
   'prompt.title': 'هل تفضل تصفح الموقع باللغة العربية؟',
