@@ -82,6 +82,8 @@ export interface SiteSettings {
   resend_from_name: string;
   price_size_lg_px: number;
   price_size_sm_px: number;
+  explore_cover_text_visible: boolean;
+  explore_cover_text_color: string | null;
   updated_at: string;
 }
 
@@ -169,6 +171,8 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   resend_from_name: 'be Preorders',
   price_size_lg_px: 36,
   price_size_sm_px: 17,
+  explore_cover_text_visible: true,
+  explore_cover_text_color: null,
   updated_at: '',
 };
 
