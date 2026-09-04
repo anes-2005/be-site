@@ -41,6 +41,7 @@ export interface SiteSettings {
   footer_note_ar: string | null;
   logo_image: string | null;
   hero_image: string | null;
+  idea_section_image: string | null;
   about_images: string[];
   og_image: string | null;
   google_enabled: boolean;
@@ -127,6 +128,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   footer_note_ar: null,
   logo_image: null,
   hero_image: null,
+  idea_section_image: null,
   about_images: [],
   og_image: null,
   google_enabled: false,

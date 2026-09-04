@@ -104,6 +104,11 @@ export function AdminSiteSettings() {
             </div>
           </Section>
 
+          {/* IDEA SECTION */}
+          <Section title="Give Us Your Ideas — Background" desc="The inspirational photo behind the idea-submission section on your home page. Falls back to your Hero image if left empty.">
+            <ImageUpload label="Idea Section Background Image" value={draft.idea_section_image} onChange={(v) => set('idea_section_image', v)} ratio="16/9" hint="A workshop, fabric, or sketch photo works well here — something that evokes creativity." />
+          </Section>
+
           {/* TYPOGRAPHY */}
           <Section title="Price Text Size" desc="Control exactly how big the price appears, in pixels. Preview updates instantly as you type — press Save to apply it on the live site.">
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

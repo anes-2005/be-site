@@ -92,14 +92,37 @@ export function HomePage() {
         </button>
       </section>
 
-      {/* SECTION 2 — GIVE US YOUR IDEAS */}
-      <section id="idea" className="shell py-30 md:py-38">
-        <SectionHeader
-          eyebrow={t('idea.eyebrow')}
-          title={t('idea.title')}
-        />
-        <div className="mx-auto mt-16 max-w-3xl">
-          <IdeaForm />
+      {/* SECTION 2 — GIVE US YOUR IDEAS (inspirational image + floating glass card) */}
+      <section id="idea" className="relative overflow-hidden py-30 md:py-40">
+        <div className="absolute inset-0">
+          {(settings.idea_section_image || settings.hero_image) ? (
+            <img
+              src={settings.idea_section_image || settings.hero_image || ''}
+              alt=""
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <div className="h-full w-full bg-primary" />
+          )}
+          <div className="absolute inset-0 bg-primary/70" />
+        </div>
+
+        <div className="relative shell">
+          <FadeIn>
+            <div className="mx-auto max-w-xl">
+              <p className="eyebrow mb-5 text-center text-secondary">{t('idea.eyebrow')}</p>
+              <h2
+                className="text-center font-serif font-light text-bg text-balance"
+                style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '-0.01em' }}
+              >
+                {t('idea.title')}
+              </h2>
+            </div>
+
+            <div className="mx-auto mt-14 max-w-xl rounded-3xl border border-bg/15 bg-bg/90 p-8 shadow-lift backdrop-blur-md md:p-12">
+              <IdeaForm />
+            </div>
+          </FadeIn>
         </div>
       </section>
 

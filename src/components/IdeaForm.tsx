@@ -34,7 +34,7 @@ export function IdeaForm() {
 
   if (status === 'success') {
     return (
-      <div className="card flex flex-col items-center gap-4 px-8 py-16 text-center">
+      <div className="flex flex-col items-center gap-4 py-6 text-center">
         <div className="flex h-14 w-14 items-center justify-center rounded-full bg-success/10">
           <Check size={22} strokeWidth={1.5} className="text-success" />
         </div>
@@ -51,7 +51,7 @@ export function IdeaForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="card p-8 md:p-12">
+    <form onSubmit={handleSubmit}>
       <div className="mb-8 flex items-center gap-3">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary/15">
           <Sparkles size={16} strokeWidth={1.5} className="text-secondary" />
