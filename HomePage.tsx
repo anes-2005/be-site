@@ -6,6 +6,7 @@ import { useSeo } from '@/lib/seo';
 import { navigate } from '@/lib/router';
 import { FadeIn } from '@/components/FadeIn';
 import { SectionHeader } from '@/components/SectionHeader';
+import { IdeaForm } from '@/components/IdeaForm';
 import { CollectionShowcaseCarousel } from '@/components/CollectionShowcaseCarousel';
 import { Button } from '@/components/Button';
 import { ArrowDown } from 'lucide-react';
@@ -83,7 +84,7 @@ export function HomePage() {
         </div>
 
         <button
-          onClick={() => document.getElementById('why-preorder')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+          onClick={() => document.getElementById('idea')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 text-bg/50 transition-colors hover:text-bg"
           aria-label="Scroll down"
         >
@@ -91,7 +92,18 @@ export function HomePage() {
         </button>
       </section>
 
-      {/* SECTION 2 — WHY PREORDER (materials / quality) */}
+      {/* SECTION 2 — GIVE US YOUR IDEAS */}
+      <section id="idea" className="shell py-30 md:py-38">
+        <SectionHeader
+          eyebrow={t('idea.eyebrow')}
+          title={t('idea.title')}
+        />
+        <div className="mx-auto mt-16 max-w-3xl">
+          <IdeaForm />
+        </div>
+      </section>
+
+      {/* SECTION 3 — WHY PREORDER (materials / quality) */}
       <section id="why-preorder" className="bg-bg-100 py-30 md:py-38">
         <div className="content">
           <SectionHeader
@@ -122,7 +134,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 3 — EXPLORE COLLECTIONS (rotating showcase, links to /store) */}
+      {/* SECTION 4 — EXPLORE COLLECTIONS (rotating showcase, links to /store) */}
       <section className="shell py-30 md:py-38">
         <SectionHeader
           eyebrow={t('explore.eyebrow')}
