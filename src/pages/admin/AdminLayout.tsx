@@ -4,13 +4,14 @@ import { Logo } from '@/components/Logo';
 import { useSettings } from '@/lib/settings-context';
 import {
   LayoutDashboard, Layers, ClipboardList, Settings, ExternalLink,
-  Eye, EyeOff, ArrowLeft, Image, BarChart3, Mail, BookOpen,
+  Eye, EyeOff, ArrowLeft, Image, BarChart3, Mail, BookOpen, Lightbulb,
 } from 'lucide-react';
 
 const navItems = [
   { label: 'Overview', to: '/admin', icon: LayoutDashboard },
   { label: 'Collections', to: '/admin/collections', icon: Layers },
   { label: 'Preorders', to: '/admin/preorders', icon: ClipboardList },
+  { label: 'Ideas', to: '/admin/ideas', icon: Lightbulb },
   { label: 'Media', to: '/admin/media', icon: Image },
   { label: 'Analytics', to: '/admin/analytics', icon: BarChart3 },
   { label: 'Brand Story', to: '/admin/story', icon: BookOpen },
