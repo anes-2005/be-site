@@ -84,6 +84,7 @@ export interface SiteSettings {
   price_size_sm_px: number;
   explore_cover_text_visible: boolean;
   explore_cover_text_color: string | null;
+  whatsapp_number: string | null;
   updated_at: string;
 }
 
@@ -173,6 +174,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   price_size_sm_px: 17,
   explore_cover_text_visible: true,
   explore_cover_text_color: null,
+  whatsapp_number: '213560309140',
   updated_at: '',
 };
 

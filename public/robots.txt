@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://befashion.netlify.app/sitemap.xml

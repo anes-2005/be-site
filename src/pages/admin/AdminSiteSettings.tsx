@@ -91,6 +91,12 @@ export function AdminSiteSettings() {
             <BilingualInput label="Brand Name" value={draft.brand_name} valueAr={draft.brand_name_ar} onChange={(v) => set('brand_name', v)} onChangeAr={(v) => set('brand_name_ar', v)} />
             <BilingualInput label="Tagline" value={draft.brand_tagline} valueAr={draft.brand_tagline_ar} onChange={(v) => set('brand_tagline', v)} onChangeAr={(v) => set('brand_tagline_ar', v)} />
             <Input label="Instagram URL" value={draft.instagram_url} onChange={(v) => set('instagram_url', v)} />
+            <Input
+              label="WhatsApp Number"
+              value={draft.whatsapp_number ?? ''}
+              onChange={(v) => set('whatsapp_number', v || null)}
+              hint="Full international number, digits only (e.g. 213560309140). Leave empty to hide the WhatsApp button."
+            />
           </Section>
 
           {/* HERO */}

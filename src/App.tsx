@@ -22,6 +22,8 @@ import { AdminAnalyticsDashboard } from '@/pages/admin/AdminAnalyticsDashboard';
 import { AdminGoogleIntegrations } from '@/pages/admin/AdminGoogleIntegrations';
 import { AdminBrandStory } from '@/pages/admin/AdminBrandStory';
 import { AdminIdeasPage } from '@/pages/admin/AdminIdeasPage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 
 const ADMIN_PREFIX = '/admin';
 
@@ -74,8 +76,11 @@ function AppContent() {
     case '/confirmation':
       page = <ConfirmationPage />;
       break;
+    case '/not-found':
+      page = <NotFoundPage />;
+      break;
     default:
-      page = <HomePage />;
+      page = <NotFoundPage />;
   }
 
   return (
@@ -84,6 +89,7 @@ function AppContent() {
       <div className="flex-1">{page}</div>
       <Footer />
       <TranslationPrompt />
+      <WhatsAppButton />
     </div>
   );
 }
